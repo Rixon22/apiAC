@@ -13,7 +13,10 @@ export class App {
   protected readonly title = signal('Dating App');
 
   ngOnInit(): void {
-    this.http.get('https://localhost:3000/api/members').subscribe(
+    this.http.get('https://localhost:7177/api/members').subscribe(
       next => {
         console.log(next);
       }
+    );
+  }
+}
