@@ -31,6 +31,27 @@ namespace API.Controllers
             return Ok(user);
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult> Login(LoginRequest request)
+        {
+            var user = await context.Users.SingleOrDefaultAsync(x => x.Email == request.Email.ToLower());
+
+            if (user == null)
+                return Unauthorized("Invalid email or password");
+
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(request.Password));
+
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != user.PasswordHash[i])
+                    return Unauthorized("Invalid email or password");
+            }
+
+            return Ok(user);
+        }
+
         private async Task<bool> EmailExists(string email)
         {
             return await context.Users.AnyAsync(x => x.Email == email.ToLower());
