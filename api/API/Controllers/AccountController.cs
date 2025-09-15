@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using API.Data;
 using API.DTOs;
+using API.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers
 {
     // https://localhost:5001/api/account
-    public class AccountController(AppDbContext context) : BaseApiController
+    public class AccountController(AppDbContext context, ITokenService tokenService) : BaseApiController
     {
         [HttpPost("register")]
-        public async Task<ActionResult> Register(RegisterRequest request)
+        public async Task<ActionResult<UserResponse>> Register(RegisterRequest request)
         {
             if (await EmailExists(request.Email))
                 return BadRequest("Email is already in use");
@@ -28,11 +29,17 @@ namespace API.Controllers
 
             context.Users.Add(user);
             await context.SaveChangesAsync();
-            return Ok(user);
+            return Ok(new UserResponse
+            {
+                Id = user.Id.ToString(),
+                Email = user.Email,
+                DisplayName = user.DisplayName,
+                Token = tokenService.CreateToken(user)
+            });
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login(LoginRequest request)
+        public async Task<ActionResult<UserResponse>> Login(LoginRequest request)
         {
             var user = await context.Users.SingleOrDefaultAsync(x => x.Email == request.Email.ToLower());
 
@@ -49,7 +56,14 @@ namespace API.Controllers
                     return Unauthorized("Invalid email or password");
             }
 
-            return Ok(user);
+            return Ok(new UserResponse
+            {
+                Id = user.Id.ToString(),
+                Email = user.Email,
+                DisplayName = user.DisplayName,
+                Token = tokenService.CreateToken(user)
+            });
+
         }
 
         private async Task<bool> EmailExists(string email)
