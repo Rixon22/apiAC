@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using API.Data;
 using API.DTOs;
+using API.Extensions;
 using API.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,13 +30,8 @@ namespace API.Controllers
 
             context.Users.Add(user);
             await context.SaveChangesAsync();
-            return Ok(new UserResponse
-            {
-                Id = user.Id.ToString(),
-                Email = user.Email,
-                DisplayName = user.DisplayName,
-                Token = tokenService.CreateToken(user)
-            });
+
+            return user.ToDto(tokenService);
         }
 
         [HttpPost("login")]
@@ -56,13 +52,7 @@ namespace API.Controllers
                     return Unauthorized("Invalid email or password");
             }
 
-            return Ok(new UserResponse
-            {
-                Id = user.Id.ToString(),
-                Email = user.Email,
-                DisplayName = user.DisplayName,
-                Token = tokenService.CreateToken(user)
-            });
+            return user.ToDto(tokenService);
 
         }
 
