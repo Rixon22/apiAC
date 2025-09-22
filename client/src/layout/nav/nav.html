@@ -14,9 +14,10 @@
             <a routerLink="/messages" routerLinkActive="text-yellow-300" class="hover:text-yellow-300">Messages</a>
         </nav>
         <div class="flex aligin-middle ml-auto gap-3">
-            <form class="flex items-center gap-3">
-                <input type="text" class="input" placeholder="Email">
-                <input type="password" class="input" placeholder="Password">
+            <form #loginForm="ngForm" (ngSubmit)="login()" class="input" class="flex items-center gap-3">
+                <input [(ngModel)]="creeds.email" name="email" type="text" class="input" placeholder="Email">
+                <input [(ngModel)]="creeds.password" name="password" type="password" class="input"
+                    placeholder="Password">
                 <button class="btn btn-primary" type="submit">Login</button>
             </form>
         </div>
