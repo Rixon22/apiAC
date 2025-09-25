@@ -17,7 +17,7 @@ export class App implements OnInit {
   private accountService = inject(AccountService);
   private http = inject(HttpClient);
   protected readonly title = signal('Dating App');
-  protected members = signal<any>([]);
+  protected members = signal<User[]>([]);
 
   async ngOnInit(): Promise<void> {
     this.setCurrentUser();
@@ -31,9 +31,9 @@ export class App implements OnInit {
     this.accountService.currentUser.set(user);
   }
 
-  async getMembers(): Promise<Object> {
+  async getMembers(): Promise<User[]> {
     try {
-      return await lastValueFrom(this.http.get('https://localhost:7177/api/members'));
+      return await lastValueFrom(this.http.get<User[]>('https://localhost:7177/api/members'));
     } catch (error) {
       console.log(error);
       throw error;

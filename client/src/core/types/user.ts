@@ -6,7 +6,6 @@ export type User = {
     imageUrl: string;
 };
 
-
 export type LoginCreds = {
     email: string;
     password: string;
