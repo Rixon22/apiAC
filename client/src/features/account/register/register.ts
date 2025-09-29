@@ -1,6 +1,7 @@
-import { Component, input, output } from '@angular/core';
-import { RegisterCreds, User } from '../../../core/types/user';
+import { Component, inject, input, output } from '@angular/core';
+import { RegisterCreds } from '../../../core/types/user';
 import { FormsModule } from '@angular/forms';
+import { AccountService } from '../../../core/services/account-service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './register.css'
 })
 export class Register {
-  membersFromHome = input.required<User[]>();
+  private accountService = inject(AccountService);
   canceledRegister = output<boolean>();
   protected creds = {} as RegisterCreds;
 

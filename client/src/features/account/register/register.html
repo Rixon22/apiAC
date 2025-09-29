@@ -5,13 +5,6 @@
             class="input w-full" name="displayName" placeholder="Display Name" [(ngModel)]="creds.displayName"> <input
             type="password" class="input w-full" name="password" placeholder="Password" [(ngModel)]="creds.password">
 
-        <select class="select w-full">
-            <option disable selected>Pick a member</option>
-            @for (member of membersFromHome(); track $index) {
-            <option value="{{member.id}}">{{member.displayName}}</option>
-            }
-        </select>
-
         <div class="flex items-center justify-end gap-3"> <button class="btn btn-primary">Register</button>
             <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
         </div>
