@@ -29,10 +29,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             toast.error('Unauthorized');
             break;
           case 404:
-            toast.error('Not Found');
+            router.navigateByUrl('/not-found');
             break;
           case 500:
-            toast.error('Server Error');
+            const navigationExtras = { state: { error: err.error } };
+            router.navigateByUrl('/server-error', navigationExtras);
             break;
           default:
             toast.error('Something went wrong');
