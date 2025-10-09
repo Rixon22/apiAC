@@ -6,11 +6,11 @@ namespace API.DTOs;
 public class RegisterRequest
 {
     [Required]
-    public required string DisplayName { get; set; }
+    public string DisplayName { get; set; } = string.Empty;
     [Required]
     [EmailAddress]
-    public required string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
     [Required]
     [MinLength(4)]
-    public required string Password { get; set; }
+    public string Password { get; set; } = string.Empty;
 }

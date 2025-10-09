@@ -13,7 +13,17 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (err) {
         switch (err.status) {
           case 400:
-            toast.error(err.error);
+            if (err.error.errors) {
+              const modelStateErrors = [];
+              for (const key in err.error.errors) {
+                if (err.error.errors[key]) {
+                  modelStateErrors.push(err.error.errors[key])
+                }
+              }
+              throw modelStateErrors.flat();
+            } else {
+              toast.error(err.error, err.status)
+            }
             break;
           case 401:
             toast.error('Unauthorized');
