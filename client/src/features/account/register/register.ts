@@ -1,5 +1,5 @@
 import { Component, inject, input, output } from '@angular/core';
-import { RegisterCreds } from '../../../core/types/user';
+import { RegisterCreds } from '../../../types/user';
 import { FormsModule } from '@angular/forms';
 import { AccountService } from '../../../core/services/account-service';
 
