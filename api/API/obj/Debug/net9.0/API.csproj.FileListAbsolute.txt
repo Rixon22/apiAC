@@ -474,3 +474,4 @@ C:\Users\roys0\Documents\Apps\DatingApp\api\API\bin\Debug\net9.0\System.Identity
 C:\Users\roys0\Documents\Apps\DatingApp\api\API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\roys0\Documents\Apps\DatingApp\api\API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
 C:\Users\roys0\Documents\Apps\DatingApp\api\API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\roys0\Documents\Apps\DatingApp\api\API\bin\Debug\net9.0\Data\UserSeedData.json

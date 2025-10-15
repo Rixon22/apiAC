@@ -22,15 +22,15 @@ public class Seed
             return;
         }
 
-        using var hmac = new HMACSHA512();
-
         foreach (var seedUser in seedUsers)
         {
+            using var hmac = new HMACSHA512();
             var user = new AppUser
             {
                 Id = seedUser.Id,
                 Email = seedUser.Email,
                 DisplayName = seedUser.DisplayName,
+                ImageUrl = seedUser.ImageUrl,
                 PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes("password")),
                 PasswordSalt = hmac.Key,
                 Member = new Member
