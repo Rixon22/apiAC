@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using API.Data;
 using API.DTOs;
-using API.Extensions;
+using API.Mappers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
