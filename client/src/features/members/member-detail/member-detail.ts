@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MembersService } from '../../../core/services/memebers-service';
 import { Observable } from 'rxjs';
 import { Member } from '../../../types/members';
@@ -8,7 +8,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-member-detail',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './member-detail.html',
   styleUrl: './member-detail.css'
 })
