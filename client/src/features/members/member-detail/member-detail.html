@@ -1,4 +1,4 @@
-@if (member$ | async; as member) {
+@if (member(); as member) {
 <div class="flex gap-6">
     <div class="card bg-base-100 flex flex-col h-[85vh] w-1/4">
         <img class="rounded-full mx-10 mt-3 object-cover" src="{{member.imageUrl || './user.jpg'}}"
@@ -15,8 +15,8 @@
             <div class="divider"></div>
             <ul class="menu rounded-box w-full text-xl">
                 <li><a routerLink="profile" routerLinkActive="text-primary">Profile</a></li>
-                <li><a routerLink="profile" routerLinkActive="text-primary">Photos</a></li>
-                <li><a routerLink="profile" routerLinkActive="text-primary">Messages</a></li>
+                <li><a routerLink="photos" routerLinkActive="text-primary">Photos</a></li>
+                <li><a routerLink="messages" routerLinkActive="text-primary">Messages</a></li>
             </ul>
         </div>
         <div class="card-actions justify-between gap-2 px-2 mb-3">
