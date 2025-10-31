@@ -28,6 +28,7 @@ public class MembersController(IMembersRepository membersRepository) : BaseApiCo
         return member;
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}/photos")]
     public async Task<ActionResult<IReadOnlyList<Photo>>> GetPhotos(string id)
     {
