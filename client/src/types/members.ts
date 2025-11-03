@@ -12,8 +12,8 @@ export interface Member {
 }
 
 export interface Photo {
+    imageUrl: any;
     id: number;
-    url: string;
     publicId?: string;
     memberId: string;
 }

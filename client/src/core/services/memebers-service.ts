@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member, Photo } from '../../types/members';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AccountService } from './account-service';
 
 @Injectable({
@@ -21,8 +21,18 @@ export class MembersService {
     return this.http.get<Member[]>(this.baseUrl + "members");
   }
 
-  getPhotos(id: string) {
-    return this.http.get<Photo[]>(`${this.baseUrl}members/${id}/photos`);
+  getPhotos(id: string): Observable<Photo[]> {
+    return this.http.get<Photo[]>(`${this.baseUrl}members/${id}/photos`).pipe(
+      map(photos =>
+        photos.map(p => ({
+          id: p.id,
+          imageUrl: p.imageUrl,
+          url: p.imageUrl,
+          publicId: p.publicId,
+          memberId: p.memberId
+        }))
+      )
+    );
   }
 
   private getHttpOptions() {
