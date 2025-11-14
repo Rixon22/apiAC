@@ -1,0 +1,31 @@
+meta {
+  name: Member - Not Found
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/members/123456
+  body: none
+  auth: bearer
+}
+
+headers {
+  Authorization: {{authToken}}
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyZW5pdGFAdGVzdC5jb20iLCJuYW1laWQiOiJhcmVuaXRhLWlkIiwibmJmIjoxNzYzMTMzNDAzLCJleHAiOjE3NjM3MzgyMDMsImlhdCI6MTc2MzEzMzQwM30.t3lZlCGXh2rBrdmPT7-vlU7RprXs7VtznIdwwQbNQgUlSqMGJB45pWNNatzQ7nDirGTj1nEAU1QSwmwtwMAYwg
+}
+
+tests {
+  
+    test("Should return not found", function() {
+      expect(res.getStatus()).to.equal(404);
+    });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
